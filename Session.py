@@ -55,6 +55,8 @@ class Transmitter(threading.Thread):
                 self.socket.send(data)
                 debug("sent patch over socket {s}".format(s = self.socket))
                 debug("queue: {q}".format(q = self.queue))
+            else:
+                time.sleep(0.01)
 
 class Reciever (threading.Thread):
     """
@@ -77,6 +79,8 @@ class Reciever (threading.Thread):
                 debug ("recieved data: {d}".format(d = data))
                 data = data.decode(ENCODING) # decode the patch
                 self.parent.patch_view(data) # patch the session's view
+            else:
+                time.sleep(0.01)
 
 class Session(threading.Thread):
 
